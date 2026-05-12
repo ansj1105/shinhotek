@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 
@@ -34,6 +34,7 @@ export function ContactForm({
   const [fieldErrors, setFieldErrors] = useState<Partial<Record<FieldName, string>>>({});
   const [submitting, setSubmitting] = useState(false);
   const [captchaSiteKey, setCaptchaSiteKey] = useState("");
+  const [captchaConfigLoaded, setCaptchaConfigLoaded] = useState(false);
   const [captchaToken, setCaptchaToken] = useState("");
   const [captchaRendered, setCaptchaRendered] = useState(false);
   const [captchaLoadFailed, setCaptchaLoadFailed] = useState(false);
@@ -42,6 +43,7 @@ export function ContactForm({
   const isKo = locale === "ko";
   const requiredErrorMessage = isKo ? "\uD544\uC218 \uC785\uB825 \uAC12\uC785\uB2C8\uB2E4" : "This field is required.";
   const robotErrorMessage = isKo ? "\uB85C\uBD07\uC774 \uC544\uB2D8\uC744 \uD655\uC778\uD574 \uC8FC\uC138\uC694." : "Please complete the reCAPTCHA verification.";
+  const captchaRequired = captchaConfigLoaded && Boolean(captchaSiteKey);
 
   useEffect(() => {
     let active = true;
@@ -50,14 +52,16 @@ export function ContactForm({
       const response = await fetch("/api/contact/recaptcha-site-key");
       const data = (await response.json()) as { siteKey?: string };
 
-      if (active && data.siteKey) {
-        setCaptchaSiteKey(data.siteKey);
+      if (active) {
+        setCaptchaSiteKey(data.siteKey ?? "");
+        setCaptchaConfigLoaded(true);
       }
     }
 
     loadSiteKey().catch(() => {
       if (active) {
         setCaptchaSiteKey("");
+        setCaptchaConfigLoaded(true);
       }
     });
 
@@ -158,7 +162,9 @@ export function ContactForm({
       }
     }
 
-    if (!captchaToken) {
+    if (!captchaConfigLoaded) {
+      nextErrors.robotVerified = isKo ? "보안 인증 설정을 확인하는 중입니다." : "Security verification is still loading.";
+    } else if (captchaRequired && !captchaToken) {
       nextErrors.robotVerified = robotErrorMessage;
     }
 
@@ -196,7 +202,7 @@ export function ContactForm({
           email: formData.get("email"),
           phone: formData.get("phone"),
           message: formData.get("message"),
-          recaptchaToken: captchaToken,
+          recaptchaToken: captchaRequired ? captchaToken : "",
           locale,
         }),
         headers: {
@@ -315,10 +321,10 @@ export function ContactForm({
       </div>
       <div className="contactRobotCheck">
         <div ref={captchaContainerRef} className="contactRecaptchaWidget" />
-        {!captchaSiteKey || (!captchaRendered && !captchaLoadFailed) ? (
+        {!captchaConfigLoaded || (captchaRequired && !captchaRendered && !captchaLoadFailed) ? (
           <span>{isKo ? "\uBCF4\uC548 \uC778\uC99D\uC744 \uBD88\uB7EC\uC624\uB294 \uC911\uC785\uB2C8\uB2E4." : "Loading security verification."}</span>
         ) : null}
-        {captchaLoadFailed ? (
+        {captchaRequired && captchaLoadFailed ? (
           <p className="contactFormError">
             {isKo
               ? "\uBCF4\uC548 \uC778\uC99D\uC744 \uBD88\uB7EC\uC624\uC9C0 \uBABB\uD588\uC2B5\uB2C8\uB2E4. \uD398\uC774\uC9C0\uB97C \uC0C8\uB85C\uACE0\uCE68\uD574 \uC8FC\uC138\uC694."
@@ -340,3 +346,6 @@ export function ContactForm({
     </form>
   );
 }
+
+
+

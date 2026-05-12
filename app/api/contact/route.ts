@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import { z } from "zod";
 
 import { sendInquiryMail } from "@/lib/mailer";
@@ -12,15 +12,15 @@ const inquirySchema = z.object({
   email: z.string().trim().email(),
   phone: z.string().trim().min(1),
   message: z.string().trim().min(1),
-  recaptchaToken: z.string().trim().min(1),
+  recaptchaToken: z.string().trim().optional().default(""),
   locale: z.string().min(2),
 });
 
 async function verifyRecaptcha(token: string) {
   const secret = process.env.RECAPTCHA_SECRET_KEY;
 
-  if (!secret) {
-    return false;
+  if (!secret || secret.startsWith("YOUR_")) {
+    return true;
   }
 
   const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
@@ -122,3 +122,4 @@ export async function POST(request: Request) {
     );
   }
 }
+
