@@ -1,0 +1,292 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model SiteConfig {
+  id                Int                @id @default(1)
+  heroTitleKo       String
+  heroTitleEn       String
+  heroDescriptionKo String             @db.Text
+  heroDescriptionEn String             @db.Text
+  heroImageUrl      String?
+  heroFontSize      Int                @default(56)
+  storyTitleKo      String             @default("신호텍 소개")
+  storyTitleEn      String             @default("Brand Origin : Shinhotek")
+  storyBodyKo       String             @db.Text
+  storyBodyEn       String             @db.Text
+  storyFontSize     Int                @default(17)
+  storyTitleFontSizeKo Int             @default(42)
+  storyTitleFontSizeEn Int             @default(42)
+  storyEyebrowFontSizeKo Int           @default(18)
+  storyEyebrowFontSizeEn Int           @default(18)
+  storyBodyFontSizeKo Int              @default(16)
+  storyBodyFontSizeEn Int              @default(16)
+  seriesTitleKo     String             @default("Product categories overview")
+  seriesTitleEn     String             @default("Product categories overview")
+  seriesLeadKo      String             @db.Text @default("레이저·광학 제품군을 한 번에 확인할 수 있습니다.")
+  seriesLeadEn      String             @db.Text @default("Explore the optical solution lineup and operational software in one view.")
+  seoTitleKo        String
+  seoTitleEn        String
+  seoDescriptionKo  String             @db.Text
+  seoDescriptionEn  String             @db.Text
+  heroImageHistory  HeroImageHistory[]
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+}
+
+model PageHeroConfig {
+  id               Int      @id @default(autoincrement())
+  pageKey          String   @unique
+  eyebrowKo        String
+  eyebrowEn        String
+  titleKo          String
+  titleEn          String
+  descriptionKo    String   @db.Text
+  descriptionEn    String   @db.Text
+  backgroundImageUrl String?
+  backgroundOpacity Float   @default(0.6)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model CompanyContent {
+  id              Int      @id @default(1)
+  historyTitleKo  String
+  historyTitleEn  String
+  historyBodyKo   String   @db.Text
+  historyBodyEn   String   @db.Text
+  brandTitleKo    String
+  brandTitleEn    String
+  brandLeadKo     String
+  brandLeadEn     String
+  visionTitleKo   String
+  visionTitleEn   String
+  visionBodyKo    String   @db.Text
+  visionBodyEn    String   @db.Text
+  goalTitleKo     String
+  goalTitleEn     String
+  goalBodyKo      String   @db.Text
+  goalBodyEn      String   @db.Text
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model HeroImageHistory {
+  id           Int        @id @default(autoincrement())
+  siteConfigId Int
+  imageUrl     String
+  createdAt    DateTime   @default(now())
+  siteConfig   SiteConfig @relation(fields: [siteConfigId], references: [id], onDelete: Cascade)
+}
+
+model Application {
+  id               Int      @id @default(autoincrement())
+  slug             String   @unique
+  titleKo          String
+  titleEn          String
+  summaryKo        String   @db.Text
+  summaryEn        String   @db.Text
+  imageUrl         String?
+  bulletsKo        Json
+  bulletsEn        Json
+  sortOrder        Int      @default(0)
+  published        Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Product {
+  id               Int      @id @default(autoincrement())
+  slug             String   @unique
+  displayOrder     Int      @default(0)
+  nameKo           String
+  nameEn           String
+  heroEyebrowKo    String?
+  heroEyebrowEn    String?
+  heroTitleKo      String?
+  heroTitleEn      String?
+  heroLeadKo       String?  @db.Text
+  heroLeadEn       String?  @db.Text
+  heroBgImageUrl   String?
+  heroBgOpacity    Float?   @default(0.9)
+  summaryKo        String   @db.Text
+  summaryEn        String   @db.Text
+  contentKo        String   @db.Text
+  contentEn        String   @db.Text
+  featuresKo       Json?
+  featuresEn       Json?
+  applicationsKo   Json?
+  applicationsEn   Json?
+  specsKo          Json?
+  specsEn          Json?
+  imageUrl         String?
+  seoTitleKo       String?
+  seoTitleEn       String?
+  seoDescriptionKo String?  @db.Text
+  seoDescriptionEn String?  @db.Text
+  published        Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  documents        ProductDocument[]
+}
+
+model ProductDocument {
+  id          Int                 @id @default(autoincrement())
+  productId   Int
+  kind        ProductDocumentKind
+  titleKo     String
+  titleEn     String
+  fileUrl     String
+  fileName    String?
+  mimeType    String?
+  fileSize    Int?
+  displayOrder Int                @default(0)
+  published   Boolean            @default(true)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  product     Product            @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId, kind])
+  @@index([published, displayOrder])
+}
+
+model DistributorSettings {
+  id          Int      @id @default(1)
+  mapImageUrl String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model DistributorRegion {
+  id            Int                  @id @default(autoincrement())
+  slug          String               @unique
+  nameKo        String
+  nameEn        String
+  descriptionKo String?              @db.Text
+  descriptionEn String?              @db.Text
+  sortOrder     Int                  @default(0)
+  enabled       Boolean              @default(true)
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+  partners      DistributorPartner[]
+
+  @@index([enabled, sortOrder])
+}
+
+model DistributorPartner {
+  id         Int               @id @default(autoincrement())
+  regionId   Int
+  countryKo  String
+  countryEn  String
+  companyKo  String
+  companyEn  String
+  legalName  String?
+  addressKo  String            @db.Text
+  addressEn  String            @db.Text
+  telephone  String?
+  email      String?
+  website    String?
+  logoUrl    String?
+  sortOrder  Int               @default(0)
+  published  Boolean           @default(true)
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+  region     DistributorRegion @relation(fields: [regionId], references: [id], onDelete: Cascade)
+
+  @@index([regionId, published, sortOrder])
+}
+
+model Resource {
+  id               Int      @id @default(autoincrement())
+  slug             String   @unique
+  displayIndex     Int      @default(1)
+  titleKo          String
+  titleEn          String
+  excerptKo        String   @db.Text
+  excerptEn        String   @db.Text
+  bodyKo           String   @db.Text
+  bodyEn           String   @db.Text
+  fileUrl          String?
+  contentImageUrl  String?
+  contentImageAltKo String?
+  contentImageAltEn String?
+  contentImageWidth Int?
+  contentImagePlacement String @default("after")
+  publishedAt      DateTime @default(now())
+  published        Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Inquiry {
+  id               Int           @id @default(autoincrement())
+  company          String?
+  name             String
+  email            String
+  phone            String?
+  message          String        @db.Text
+  locale           String
+  status           InquiryStatus @default(RECEIVED)
+  internalNote     String?       @db.Text
+  replySubject     String?
+  replyBody        String?       @db.Text
+  replySentAt      DateTime?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+}
+
+model AdminAccount {
+  id             Int              @id @default(autoincrement())
+  username       String           @unique
+  passwordHash   String
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  sessions       AdminSession[]
+  accessLogs     AdminAccessLog[]
+}
+
+model AdminSession {
+  id           Int          @id @default(autoincrement())
+  token        String       @unique
+  adminId      Int
+  expiresAt    DateTime
+  createdAt    DateTime     @default(now())
+  admin        AdminAccount @relation(fields: [adminId], references: [id], onDelete: Cascade)
+}
+
+model AdminAccessLog {
+  id           Int          @id @default(autoincrement())
+  adminId      Int?
+  username     String
+  ipAddress    String?
+  userAgent    String?
+  success      Boolean      @default(false)
+  createdAt    DateTime     @default(now())
+  admin        AdminAccount? @relation(fields: [adminId], references: [id], onDelete: SetNull)
+}
+
+model VisitLog {
+  id           Int      @id @default(autoincrement())
+  visitDate    DateTime
+  visitorKey   String
+  locale       String?
+  createdAt    DateTime @default(now())
+
+  @@unique([visitDate, visitorKey])
+}
+
+enum InquiryStatus {
+  RECEIVED
+  REVIEWING
+  REPLIED
+}
+
+enum ProductDocumentKind {
+  DATASHEET
+  DRAWING
+}

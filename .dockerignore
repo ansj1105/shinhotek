@@ -1,0 +1,24 @@
+.git
+.next
+node_modules
+npm-debug.log*
+.env.local
+.env*.local
+
+# Local reference assets and screenshots are not needed in the Docker image.
+Application 이미지/
+Customizing 이미지/
+Customizing 순환도 이미지/
+newhero/
+customo순환도/
+*.pdf
+*.png
+*.jpg
+*.jpeg
+
+!.env.example
+!public/**/*.png
+!public/**/*.jpg
+!public/**/*.jpeg
+!public/**/*.webp
+!public/**/*.avif

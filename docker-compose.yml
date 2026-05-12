@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: shinhotek
+      POSTGRES_USER: shinhotek
+      POSTGRES_PASSWORD: shinhotek
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql://shinhotek:shinhotek@db:5432/shinhotek?schema=public
+    volumes:
+      - resource_uploads:/app/public/uploads/resources
+      - product_document_uploads:/app/public/uploads/product-documents
+    ports:
+      - "3000:3000"
+
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./infra/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./infra/nginx/certs:/etc/nginx/certs:ro
+
+volumes:
+  postgres_data:
+  resource_uploads:
+  product_document_uploads:
