@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -24,6 +24,7 @@ const adminMenu: AdminMenuGroup[] = [
     id: "site",
     label: "사이트 관리",
     children: [
+      { href: "/asdasddfg/admin", label: "대시보드", meta: "Overview / Tasks", icon: "home" },
       { href: "/asdasddfg/admin/home", label: "메인 설정", meta: "Hero / Story / SEO", icon: "home" },
       { href: "/asdasddfg/admin/company", label: "회사소개", meta: "Title / Body / Vision", icon: "home" },
       { href: "/asdasddfg/admin/applications", label: "Application", meta: "소개 / 정렬 / 노출", icon: "apps" },
@@ -198,8 +199,8 @@ export function AdminShell({
   const unresolvedInquiryCount = pendingInquiries ?? 0;
 
   useEffect(() => {
-    const savedTheme = window.localStorage.getItem("lumos-admin-theme");
-    const savedCollapsed = window.localStorage.getItem("lumos-admin-collapsed");
+    const savedTheme = window.localStorage.getItem("shinhotek-admin-theme");
+    const savedCollapsed = window.localStorage.getItem("shinhotek-admin-collapsed");
 
     if (savedTheme === "dark" || savedTheme === "light") {
       setTheme(savedTheme);
@@ -211,8 +212,8 @@ export function AdminShell({
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem("lumos-admin-theme", theme);
-    window.localStorage.setItem("lumos-admin-collapsed", String(collapsed));
+    window.localStorage.setItem("shinhotek-admin-theme", theme);
+    window.localStorage.setItem("shinhotek-admin-collapsed", String(collapsed));
   }, [theme, collapsed]);
 
   return (
@@ -247,6 +248,7 @@ export function AdminShell({
                         key={item.href}
                         href={item.href}
                         className={`lumosAdminNavItem ${active ? "isActive" : ""}`}
+                        aria-current={active ? "page" : undefined}
                         title={item.label}
                       >
                         <div className="lumosAdminNavIcon" aria-hidden="true">
@@ -437,3 +439,7 @@ export function AdminShell({
     </div>
   );
 }
+
+
+
+
