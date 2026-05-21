@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -14,13 +14,12 @@ type SeriesCardItem = {
 };
 
 const seriesItems: SeriesCardItem[] = [
-  { slug: "laser", name: "Laser", imageUrl: "/product-placeholder.svg", imageClassName: "isGeneric" },
-  { slug: "laser-scanner", name: "Laser Scanner", imageUrl: "/product-placeholder.svg", imageClassName: "isGeneric" },
-  { slug: "laser-metrology", name: "Laser Metrology", imageUrl: "/product-placeholder.svg", imageClassName: "isGeneric" },
-  { slug: "beam-shaping", name: "Beam Shaping", imageUrl: "/product-placeholder.svg", imageClassName: "isGeneric" },
-  { slug: "optics", name: "Optics", imageUrl: "/product-placeholder.svg", imageClassName: "isGeneric" },
-  { slug: "beam-delivery", name: "Beam Delivery", imageUrl: "/product-placeholder.svg", imageClassName: "isGeneric" },
-  { slug: "optical-solution", name: "Optical Solution", imageUrl: "/product-placeholder.svg", imageClassName: "isGeneric" },
+  { slug: "laser", name: "Laser", imageUrl: "/hero-main-laser.png", imageClassName: "isPhoto" },
+  { slug: "laser-scanner", name: "Laser Scanner", imageUrl: "/subpage-products-laser-bg.png", imageClassName: "isPhoto" },
+  { slug: "laser-metrology", name: "Laser Metrology", imageUrl: "/hero-lab-bg.avif", imageClassName: "isPhoto" },
+  { slug: "optical-solution", name: "Optical Solution", imageUrl: "/subpage-software-bg.png", imageClassName: "isPhoto" },
+  { slug: "coating-solution", name: "Coating Solution", imageUrl: "/story-origin-lab.png", imageClassName: "isPhoto" },
+  { slug: "beam-delivery", name: "Beam Delivery", imageUrl: "/subpage-products-laser-bg.png", imageClassName: "isPhoto" },
 ];
 
 type SeriesProductSource = {
@@ -33,6 +32,7 @@ type SeriesProductSource = {
 export function HomeSeriesOverview({
   locale,
   title,
+  lead,
   products,
 }: {
   locale: Locale;
@@ -105,7 +105,8 @@ export function HomeSeriesOverview({
     <section id="homeSeriesSection" className="homeSeriesSection">
       <div className="container homeSeriesInner">
         <div className="homeSeriesHead">
-          <h2 className="sectionTitle">{title ?? "Shinhotek series"}</h2>
+          <h2 className="sectionTitle">{title ?? "Product Categories"}</h2>
+          {lead ? <p className="sectionLead">{lead}</p> : null}
         </div>
 
         <div className="homeSeriesDesktop">
@@ -272,3 +273,4 @@ function SeriesFeatureCard({
     </Link>
   );
 }
+

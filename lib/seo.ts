@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 
 import { defaultLocale, locales, type Locale, siteUrl } from "@/lib/site";
 
@@ -116,7 +116,7 @@ export function buildPageMetadata({
 
 export function buildStructuredData(locale: Locale) {
   const homeUrl = absoluteUrl(localizePath(locale));
-  const logoUrl = absoluteUrl("/shinhotek-logo.svg");
+  const logoUrl = absoluteUrl("/shinhotek-logo-official.png");
   const address = {
     "@type": "PostalAddress",
     streetAddress: "1306 Daerung Techno Town-18, 19 Gasan digital 1-ro",
@@ -173,3 +173,4 @@ export function buildStructuredData(locale: Locale) {
     },
   ];
 }
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -43,10 +43,10 @@ export function Header({ locale, productLinks }: HeaderProps) {
         <div className="container headerInner">
           <Link href={`/${locale}`} className="brandLink">
             <Image
-              src="/shinhotek-logo.svg"
+              src="/shinhotek-logo-official.png"
               alt={dict.brand}
-              width={318}
-              height={86}
+              width={248}
+              height={48}
               className="brandLogo"
               priority
             />
@@ -213,3 +213,4 @@ export function Header({ locale, productLinks }: HeaderProps) {
     </header>
   );
 }
+

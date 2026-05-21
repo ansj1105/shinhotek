@@ -1,4 +1,4 @@
-import { ImageResponse } from "next/og";
+﻿import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
@@ -17,7 +17,7 @@ async function toDataUrl(filePath: string) {
 
 export default async function OpenGraphImage() {
   const icon = await toDataUrl(path.join(process.cwd(), "app", "icon.png"));
-  const logo = await toDataUrl(path.join(process.cwd(), "public", "shinhotek-logo.svg"));
+  const logo = await toDataUrl(path.join(process.cwd(), "public", "shinhotek-logo-official.png"));
 
   return new ImageResponse(
     (
@@ -172,3 +172,4 @@ export default async function OpenGraphImage() {
     size,
   );
 }
+

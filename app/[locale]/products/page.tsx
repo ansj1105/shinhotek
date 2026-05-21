@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 
@@ -11,9 +11,23 @@ import type { Locale } from "@/lib/site";
 
 const productOverviewCopy: Record<string, { title: string; bodyEn: string; bodyKo: string }> = {};
 
-const productFallbackImages: Record<string, string> = {};
+const productFallbackImages: Record<string, string> = {
+  laser: "/hero-main-laser.png",
+  "laser-scanner": "/subpage-products-laser-bg.png",
+  "laser-metrology": "/hero-lab-bg.avif",
+  "optical-solution": "/subpage-software-bg.png",
+  "coating-solution": "/story-origin-lab.png",
+  "beam-delivery": "/subpage-products-laser-bg.png",
+};
 
-const productShowcaseImageClasses: Record<string, string> = {};
+const productShowcaseImageClasses: Record<string, string> = {
+  laser: "isPhoto",
+  "laser-scanner": "isPhoto",
+  "laser-metrology": "isPhoto",
+  "optical-solution": "isPhoto",
+  "coating-solution": "isPhoto",
+  "beam-delivery": "isPhoto",
+};
 
 const defaultProductMap = new Map(defaultProducts.map((product) => [product.slug, product]));
 
@@ -73,16 +87,16 @@ export async function generateMetadata({
       ? "Product | 신호텍 레이저·광학 제품"
       : "Product | Shinhotek Laser and Optical Products",
     description: isKo
-      ? "Laser, Laser Scanner, Laser Metrology, Beam Shaping, Optics 등 신호텍 제품군을 확인하세요."
-      : "Review Shinhotek product categories including lasers, scanners, metrology systems, beam shaping optics, and optical components.",
+      ? "Laser, Laser Scanner, Laser Metrology, Optical Solution, Coating Solution, Beam Delivery 제품군을 확인하세요."
+      : "Review Shinhotek product categories including lasers, scanners, metrology systems, optical solutions, coating solutions, and beam delivery systems.",
     keywords: [
       "Product",
       "Shinhotek product",
       "industrial laser",
       "laser scanner",
       "laser metrology",
-      "beam shaping",
-      "optics",
+      "optical solution",
+      "beam delivery",
     ],
     image: "/subpage-products-laser-bg.png",
   });

@@ -1,4 +1,4 @@
-import {
+﻿import {
   defaultApplications,
   defaultCompanyContent,
   defaultDistributorRegions,
@@ -28,6 +28,8 @@ const fallbackApplications = defaultApplications.map((application, index) => ({
   createdAt: fallbackNow,
   updatedAt: fallbackNow,
 }));
+
+const retiredDefaultProductSlugs = new Set(["beam-shaping", "optics"]);
 
 const fallbackProducts = defaultProducts.map((product, index) => ({
   id: index + 1,
@@ -152,10 +154,10 @@ export async function getCompanyContent() {
 
 export async function getProducts() {
   try {
-    const products = await prisma.product.findMany({
+    const products = (await prisma.product.findMany({
       where: { published: true },
       orderBy: [{ displayOrder: "asc" }, { createdAt: "asc" }],
-    });
+    })).filter((product) => !retiredDefaultProductSlugs.has(product.slug));
 
     const mergedProducts = fallbackProducts.map((fallbackProduct) => {
       const existingProduct = products.find((product) => product.slug === fallbackProduct.slug);
@@ -283,3 +285,5 @@ export function pickLocalized<T extends Record<string, unknown>>(
   const suffix = locale === "ko" ? "Ko" : "En";
   return data[`${field}${suffix}` as keyof T];
 }
+
+

@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 
 import { getDictionary } from "@/lib/dictionaries";
@@ -19,7 +19,7 @@ export function Hero({ locale, heroImageUrl }: HeroProps) {
     heroImageUrl === "/hero-main-camera-hud.png" ||
     heroImageUrl === "/hero-main-laser.png" ||
     heroImageUrl === "/hero-main-camera-globe.png"
-      ? "/newhero/bg.png"
+      ? "/hero-main-laser.png"
       : heroImageUrl;
   const heroSpecIcons = [
     "/newhero/icon1-cutout.png",
@@ -34,6 +34,7 @@ export function Hero({ locale, heroImageUrl }: HeroProps) {
       style={{ ["--hero-image" as string]: `url("${imageUrl}")` } as CSSProperties}
     >
       <div className="heroBackdrop" aria-hidden="true">
+        <div className="heroBackdropGrid" />
         <div className="heroTechOrbit">
           <svg className="heroTechWheel" viewBox="0 0 652 652">
             <g id="circle1">
@@ -128,3 +129,4 @@ export function Hero({ locale, heroImageUrl }: HeroProps) {
     </section>
   );
 }
+

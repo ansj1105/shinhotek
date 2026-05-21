@@ -1,4 +1,5 @@
-﻿/*
+﻿@import url("https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap");
+/*
  * Breakpoints (미디어 쿼리 기준)
  * ---------------------------
  * admin layout:  1100px  → admin grid 단일 컬럼
@@ -1752,7 +1753,9 @@ select {
   border-color: color-mix(in srgb, var(--admin-success) 32%, transparent);
   background: color-mix(in srgb, var(--admin-success) 8%, var(--admin-surface));
   color: var(--admin-success);
-}`r`n.lumosAdminAssetPreview {
+}
+
+.lumosAdminAssetPreview {
   display: grid;
   gap: 12px;
 }
@@ -8521,3 +8524,833 @@ td {
 
 
 
+
+/* ULO Optics inspired client tone refresh: restrained optical manufacturing style */
+:root {
+  --bg: #f3f5f6;
+  --surface: #ffffff;
+  --surface-strong: #ffffff;
+  --text: #202832;
+  --muted: #61707c;
+  --line: rgba(32, 40, 50, 0.14);
+  --blue: #005f7f;
+  --blue-deep: #01304a;
+  --blue-soft: #dbe8ee;
+  --blue-fog: #eef4f6;
+  --ulo-cyan: #00a6c8;
+  --ulo-steel: #d7dde2;
+  --radius: 4px;
+  --shadow: none;
+}
+
+body {
+  background: #f3f5f6;
+  color: var(--text);
+  font-family: Hind, "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
+}
+
+.shell main {
+  background: #f3f5f6;
+}
+
+.siteHeader {
+  border-bottom: 1px solid rgba(32, 40, 50, 0.16);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: none;
+}
+
+.headerBar {
+  background: #ffffff;
+}
+
+.desktopNavLink {
+  color: #202832;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.desktopNavLink::after,
+.navItem::after {
+  background: var(--ulo-cyan);
+}
+
+.navDropdown {
+  border: 1px solid rgba(32, 40, 50, 0.14);
+  border-top: 3px solid var(--ulo-cyan);
+  border-radius: 0;
+  background: #ffffff;
+  box-shadow: 0 18px 38px rgba(20, 34, 48, 0.12);
+}
+
+.navDropdown a:hover,
+.navDropdown a:focus-visible {
+  color: var(--blue);
+  background: transparent;
+}
+
+.button,
+.heroLearnMore,
+.scrollTopButton,
+.applicationImageRailButton {
+  border-radius: 3px;
+  box-shadow: none;
+}
+
+.button.primary {
+  border-color: #01304a;
+  background: #01304a;
+}
+
+.button.primary:hover,
+.button.primary:focus-visible {
+  border-color: #005f7f;
+  background: #005f7f;
+}
+
+.sectionTitle,
+.headline {
+  color: #202832;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+}
+
+.eyebrow,
+.applicationKicker,
+.patentCardType {
+  color: #005f7f;
+  letter-spacing: 0.16em;
+}
+
+.heroSection {
+  background: #07131d;
+  border-bottom: 0;
+}
+
+.heroSection::after {
+  background:
+    linear-gradient(90deg, rgba(3, 9, 15, 0.82) 0%, rgba(3, 9, 15, 0.54) 43%, rgba(3, 9, 15, 0.16) 72%, rgba(3, 9, 15, 0.04) 100%),
+    linear-gradient(180deg, rgba(3, 9, 15, 0.08) 0%, rgba(3, 9, 15, 0.34) 100%);
+}
+
+.heroTechOrbit,
+.heroBackdropGrid,
+.heroBackdropWave,
+.heroBackdropTopWaves {
+  opacity: 0.18;
+}
+
+.heroCopy {
+  color: #ffffff;
+  max-width: 620px;
+}
+
+.heroHeadline {
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-shadow: none;
+}
+
+.heroSubTitle,
+.heroLead {
+  color: rgba(255, 255, 255, 0.86);
+  text-shadow: none;
+}
+
+.heroAccentRule {
+  height: 3px;
+  background: linear-gradient(90deg, var(--ulo-cyan) 0%, rgba(0, 166, 200, 0.74) 54%, rgba(0, 166, 200, 0) 100%);
+}
+
+.heroSpecIcon,
+.heroLearnMore {
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.subpageHero {
+  border-bottom: 1px solid rgba(32, 40, 50, 0.12);
+  background: #10293c;
+}
+
+.subpageHeroBgOverlay,
+.subpageHeroBgOverlay.is-products {
+  background:
+    linear-gradient(90deg, rgba(4, 17, 29, 0.82) 0%, rgba(4, 17, 29, 0.56) 44%, rgba(4, 17, 29, 0.18) 100%);
+}
+
+.subpageHeroCopy {
+  padding-left: 0;
+  border-radius: 0;
+  filter: none;
+}
+
+.subpageHero .eyebrow,
+.subpageHero .sectionLead,
+.subpageHero .sectionTitle,
+.subpageHero-products .eyebrow,
+.subpageHero-products .sectionLead,
+.subpageHero-products .sectionTitle {
+  color: #ffffff;
+  text-shadow: none;
+}
+
+.subpageHero .sectionTitle::after {
+  content: "";
+  display: block;
+  width: 78px;
+  height: 3px;
+  margin-top: 16px;
+  background: var(--ulo-cyan);
+}
+
+.storySection,
+.applicationsPage,
+.productsPage,
+.contactPage,
+.resourcesPage,
+.companyPage {
+  background: #f3f5f6;
+}
+
+.storySection::before {
+  background: rgba(243, 245, 246, 0.86);
+}
+
+.storyTopPanel,
+.companyHistorySurface,
+.companyPrinciplesSurface,
+.productsShowcase,
+.applicationsShowcase,
+.resourceDetailContentCard,
+.contactForm,
+.contactIntro {
+  border: 1px solid rgba(32, 40, 50, 0.12);
+  border-radius: 0;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.storyTopPanel {
+  padding: clamp(24px, 3vw, 42px);
+}
+
+.storyDisplayTitle,
+.storyDisplayTitleLineAccent,
+.storyEyebrow,
+.companyHistoryTitle,
+.applicationImageRailTitle,
+.productShowcaseTitle {
+  color: #005f7f;
+}
+
+.storyParagraph,
+.storyParagraphs p,
+.companyHistoryBody p,
+.applicationShowcaseText,
+.productShowcaseText,
+.sectionLead,
+.subhead {
+  color: #52616d;
+}
+
+.homeSeriesSection {
+  background: #ffffff;
+  border-top: 1px solid rgba(32, 40, 50, 0.12);
+}
+
+.homeSeriesHead,
+.homeSeriesHead .sectionTitle {
+  color: #202832;
+}
+
+.homeSeriesHead .sectionTitle::after {
+  content: "";
+  display: block;
+  width: 82px;
+  height: 3px;
+  margin-top: 15px;
+  background: var(--ulo-cyan);
+}
+
+.seriesCard,
+.seriesFeatureCard,
+.productShowcaseRow,
+.applicationShowcaseRow,
+.patentCard,
+.customizingSolutionItem {
+  border-color: rgba(32, 40, 50, 0.14);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.seriesCard:hover,
+.seriesFeatureCard:hover,
+.patentCard:hover,
+.productShowcaseMedia:hover {
+  transform: none;
+  border-color: rgba(0, 95, 127, 0.36);
+  box-shadow: none;
+}
+
+.seriesCardBody,
+.seriesFeatureContent {
+  border-top: 1px solid rgba(32, 40, 50, 0.12);
+  background: #ffffff;
+}
+
+.seriesCardText strong,
+.seriesFeatureTitle,
+.seriesFeatureTitleName,
+.seriesFeatureTitleCategory {
+  color: #202832;
+  font-weight: 600;
+}
+
+.seriesCardArrow {
+  border-radius: 0;
+  color: #005f7f;
+}
+
+.productsShowcase,
+.applicationsShowcase {
+  border-top: 3px solid #01304a;
+  border-bottom: 1px solid rgba(32, 40, 50, 0.14);
+}
+
+.productShowcaseRow,
+.applicationShowcaseRow {
+  border-bottom: 1px solid rgba(32, 40, 50, 0.14);
+}
+
+.productShowcaseMedia,
+.applicationShowcaseMedia {
+  border: 1px solid rgba(32, 40, 50, 0.12);
+  background: #ffffff;
+}
+
+.applicationImageRailTitle {
+  border-bottom-color: var(--ulo-cyan);
+}
+
+.companyHistorySurface {
+  border-top: 3px solid #01304a;
+}
+
+.companyPrinciplesHead {
+  background: #01304a;
+}
+
+.companyPrinciplesCell {
+  background: #ffffff;
+  border-color: rgba(32, 40, 50, 0.12);
+}
+
+.siteFooter {
+  border-top: 0;
+  background: #07131d;
+}
+
+.footerBlock strong,
+.footerGroupTitle {
+  color: #ffffff;
+}
+
+.footerBlock a,
+.footerBlock span,
+.footerEmail,
+.footerPhoneLink,
+.footerSubLink {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.footerBlock a:hover,
+.footerSubLink:hover {
+  color: #ffffff;
+}
+
+.footerBottom {
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 960px) {
+  .mobileMenuPanel {
+    border-top: 3px solid var(--ulo-cyan);
+    border-radius: 0;
+  }
+
+  .subpageHeroCopy {
+    padding-left: 0;
+  }
+}
+
+
+/* SHINHOTEK industrial tone refresh */
+:root {
+  --sh-dark: #07131d;
+  --sh-panel: #0d1c29;
+  --sh-ink: #1f2833;
+  --sh-muted: #61707c;
+  --sh-line: rgba(31, 40, 51, 0.14);
+  --sh-blue: #004f86;
+  --sh-cyan: #00a6df;
+  --sh-ice: #f3f6f8;
+}
+
+.shell main {
+  background: var(--sh-ice);
+}
+
+.siteHeader {
+  background: rgba(255, 255, 255, 0.98);
+  border-bottom: 1px solid rgba(31, 40, 51, 0.14);
+  box-shadow: none;
+}
+
+.desktopNavLink {
+  color: var(--sh-ink);
+  font-weight: 700;
+  letter-spacing: 0.015em;
+}
+
+.desktopNavLink::after,
+.navItem::after {
+  background: var(--sh-cyan);
+}
+
+.navDropdown {
+  border-radius: 0;
+  border: 1px solid rgba(31, 40, 51, 0.14);
+  border-top: 3px solid var(--sh-cyan);
+  box-shadow: 0 20px 42px rgba(7, 19, 29, 0.14);
+}
+
+.heroSection {
+  min-height: clamp(720px, 100vh, 980px);
+  padding: clamp(72px, 7vw, 118px) 0 clamp(86px, 8vw, 128px);
+  background: #050d14;
+}
+
+.heroSection::before {
+  background-position: center center;
+  background-size: cover;
+  filter: saturate(0.96) contrast(1.04);
+}
+
+.heroSection::after {
+  background:
+    linear-gradient(90deg, rgba(2, 8, 14, 0.88) 0%, rgba(2, 8, 14, 0.66) 36%, rgba(2, 8, 14, 0.22) 72%, rgba(2, 8, 14, 0.08) 100%),
+    linear-gradient(180deg, rgba(2, 8, 14, 0.12) 0%, rgba(2, 8, 14, 0.42) 100%);
+}
+
+.heroBackdropGrid {
+  opacity: 0.2;
+  inset: 0 0 0 52%;
+  mix-blend-mode: screen;
+}
+
+.heroTechOrbit {
+  opacity: 0.16;
+  top: 28%;
+  left: clamp(860px, 63vw, 1220px);
+}
+
+.heroCopy {
+  max-width: 650px;
+}
+
+.heroHeadline {
+  color: #ffffff;
+  font-size: clamp(52px, 6vw, 92px);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.heroSubTitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(22px, 2.5vw, 38px);
+  font-weight: 400;
+}
+
+.heroLead {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(16px, 1.2vw, 21px);
+}
+
+.heroAccentRule {
+  width: 92px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--sh-cyan) 0%, rgba(0, 166, 223, 0.72) 62%, rgba(0, 166, 223, 0) 100%);
+}
+
+.heroSpecItem {
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.heroSpecIcon {
+  border: 1px solid rgba(255, 255, 255, 0.64);
+  border-radius: 6px;
+  background: rgba(7, 19, 29, 0.24);
+}
+
+.heroLearnMore,
+.button.primary {
+  border-radius: 3px;
+  border-color: var(--sh-blue);
+  background: var(--sh-blue);
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.heroLearnMore:hover,
+.heroLearnMore:focus-visible,
+.button.primary:hover,
+.button.primary:focus-visible {
+  border-color: var(--sh-cyan);
+  background: #063f66;
+}
+
+.storySection,
+.homeSolutionSection,
+.productsPage,
+.applicationsPage,
+.companyPage,
+.contactPage,
+.resourcesPage {
+  background: var(--sh-ice);
+}
+
+.storySection::before {
+  background: rgba(243, 246, 248, 0.88);
+}
+
+.storyTopPanel,
+.productsShowcase,
+.applicationsShowcase,
+.companyHistorySurface,
+.companyPrinciplesSurface,
+.resourceDetailContentCard,
+.contactForm,
+.contactIntro {
+  border: 1px solid var(--sh-line);
+  border-radius: 0;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.storyDisplayTitle,
+.storyDisplayTitleLineAccent,
+.storyEyebrow,
+.productShowcaseTitle,
+.applicationShowcaseTitle,
+.companyHistoryTitle {
+  color: var(--sh-blue);
+}
+
+.homeSeriesSection {
+  padding: clamp(76px, 7vw, 112px) 0;
+  background:
+    linear-gradient(180deg, rgba(7, 19, 29, 0.78) 0%, rgba(7, 19, 29, 0.9) 100%),
+    url("/subpage-products-laser-bg.png") center / cover no-repeat;
+  border-top: 0;
+}
+
+.homeSeriesHead {
+  display: grid;
+  gap: 14px;
+  max-width: 760px;
+}
+
+.homeSeriesHead .sectionTitle,
+.homeSeriesHead .sectionLead {
+  color: #ffffff;
+}
+
+.homeSeriesHead .sectionLead {
+  opacity: 0.74;
+}
+
+.homeSeriesRow {
+  gap: 18px;
+}
+
+.homeSeriesRow .seriesFeatureCard,
+.homeSeriesRow.isBottom .seriesFeatureCard {
+  width: calc((100% - 54px) / 4);
+}
+
+.seriesFeatureCard {
+  grid-template-rows: 230px auto;
+  min-height: 318px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.seriesFeatureMedia {
+  height: 230px;
+  background: #0b1824;
+}
+
+.seriesFeatureImageFrame {
+  width: 100%;
+  height: 100%;
+}
+
+.seriesFeatureImageFrame.isPhoto .seriesFeatureImage {
+  object-fit: cover;
+  object-position: center center;
+}
+
+.seriesFeatureContent {
+  min-height: 76px;
+  border-top: 1px solid rgba(31, 40, 51, 0.12);
+  background: #ffffff;
+}
+
+.seriesFeatureTitle,
+.seriesFeatureTitleName,
+.seriesFeatureTitleCategory {
+  color: var(--sh-ink);
+  font-weight: 700;
+}
+
+.homeSolutionSection {
+  padding: clamp(72px, 7vw, 108px) 0 clamp(90px, 8vw, 126px);
+}
+
+.homeSolutionInner {
+  display: grid;
+  gap: clamp(30px, 4vw, 54px);
+}
+
+.homeSolutionIntro {
+  display: grid;
+  gap: 14px;
+  max-width: 860px;
+}
+
+.homeSolutionGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--sh-line);
+  border-bottom: 1px solid var(--sh-line);
+  background: #ffffff;
+}
+
+.homeSolutionItem {
+  display: grid;
+  gap: 16px;
+  min-height: 260px;
+  padding: clamp(26px, 3vw, 42px);
+  border-right: 1px solid var(--sh-line);
+}
+
+.homeSolutionItem:last-child {
+  border-right: 0;
+}
+
+.homeSolutionIndex {
+  color: var(--sh-cyan);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.homeSolutionItem h3 {
+  margin: 0;
+  color: var(--sh-ink);
+  font-size: clamp(24px, 2.1vw, 34px);
+  line-height: 1.08;
+}
+
+.homeSolutionItem p {
+  margin: 0;
+  color: var(--sh-muted);
+  font-size: 16px;
+  line-height: 1.72;
+}
+
+.homeContactBand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(28px, 3vw, 44px);
+  background: var(--sh-dark);
+  color: #ffffff;
+}
+
+.homeContactBand h2 {
+  margin: 8px 0 0;
+  color: #ffffff;
+  font-size: clamp(26px, 2.7vw, 42px);
+  line-height: 1.12;
+}
+
+.makerMarquee {
+  overflow: hidden;
+  border-top: 1px solid var(--sh-line);
+  border-bottom: 1px solid var(--sh-line);
+  background: #ffffff;
+}
+
+.makerMarqueeTrack {
+  display: flex;
+  width: max-content;
+  animation: makerMarquee 28s linear infinite;
+}
+
+.makerMarquee span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 76px;
+  padding: 0 44px;
+  color: rgba(31, 40, 51, 0.62);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  white-space: nowrap;
+}
+
+@keyframes makerMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.productsShowcase,
+.applicationsShowcase {
+  border-top: 3px solid var(--sh-blue);
+}
+
+.productShowcaseMedia,
+.applicationShowcaseMedia {
+  border: 1px solid var(--sh-line);
+  background: #ffffff;
+}
+
+.productShowcaseImage.isPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.subpageHeroBgOverlay,
+.subpageHeroBgOverlay.is-products {
+  background: linear-gradient(90deg, rgba(4, 17, 29, 0.84) 0%, rgba(4, 17, 29, 0.58) 48%, rgba(4, 17, 29, 0.18) 100%);
+}
+
+.subpageHero .sectionTitle::after {
+  content: "";
+  display: block;
+  width: 78px;
+  height: 3px;
+  margin-top: 16px;
+  background: var(--sh-cyan);
+}
+
+@media (max-width: 960px) {
+  .heroSection {
+    min-height: auto;
+  }
+
+  .heroTechOrbit {
+    display: none;
+  }
+
+  .homeSolutionGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .homeSolutionItem {
+    min-height: 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--sh-line);
+  }
+
+  .homeSolutionItem:last-child {
+    border-bottom: 0;
+  }
+
+  .homeContactBand {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* Official SHINHOTEK logo integration */
+.siteHeader {
+  background: rgba(7, 19, 29, 0.98);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.headerBar {
+  background: transparent;
+  border-bottom: 0;
+}
+
+.headerInner {
+  min-height: 92px;
+}
+
+.brandLink {
+  min-height: 48px;
+}
+
+.brandLogo {
+  width: auto;
+  height: 48px;
+}
+
+.desktopNavLink {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.desktopNavLink:hover,
+.desktopNavLink:focus-visible,
+.navItem.isOpen .desktopNavLink {
+  color: #ffffff;
+}
+
+.localeSwitch,
+.mobileMenuButton {
+  color: rgba(255, 255, 255, 0.86);
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.mobileMenuButton span {
+  background: currentColor;
+}
+
+.footerBrandLogo {
+  width: auto;
+  height: 54px;
+}
+
+@media (max-width: 960px) {
+  .headerInner {
+    min-height: 78px;
+  }
+
+  .brandLogo {
+    height: 40px;
+  }
+}
+
+/* Main page sheet structure: hero -> products -> solution -> contact -> makers -> footer */
+.homeContactSection,
+.homeMakerSection {
+  background: var(--sh-ice);
+}
+
+.homeContactSection {
+  padding: 0 0 clamp(42px, 5vw, 72px);
+}
+
+.homeMakerSection {
+  padding: 0 0 clamp(72px, 7vw, 108px);
+}

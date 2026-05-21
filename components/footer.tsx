@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 
 import { getDictionary } from "@/lib/dictionaries";
@@ -49,10 +49,10 @@ export function Footer({
           <div className="footerBrandBlock">
             <Link href={`/${locale}`} className="footerBrand" aria-label={dict.brand}>
               <Image
-                src="/shinhotek-logo-footer.svg"
+                src="/shinhotek-logo-official.png"
                 alt={dict.brand}
-                width={318}
-                height={86}
+                width={248}
+                height={48}
                 className="footerBrandLogo"
               />
             </Link>
@@ -112,3 +112,4 @@ export function Footer({
     </footer>
   );
 }
+
