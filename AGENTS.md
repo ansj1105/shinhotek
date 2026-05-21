@@ -2,7 +2,7 @@
 
 ## Project Role
 
-This repository is the SHINHOTEK website renewal project. It was scaffolded from the RUMOS/LUMOS codebase but should be maintained as an independent SHINHOTEK CMS site.
+This repository is the SHINHOTEK website renewal project. It was scaffolded from the LUMOS codebase but should be maintained as an independent SHINHOTEK CMS site.
 
 ## Local / Remote
 
@@ -71,6 +71,7 @@ Use a restrained B2B industrial style:
 
 ## Cautions
 
-- Avoid reintroducing RUMOS/LUMOS-specific naming, assets, or product assumptions unless explicitly requested.
+- Avoid reintroducing LUMOS-specific naming, assets, or product assumptions unless explicitly requested.
 - Keep product categories admin-manageable. Adding a product should not require hardcoded navigation/footer changes unless the CMS contract changes.
 - Keep Korean text UTF-8 safe when editing with PowerShell.
+
