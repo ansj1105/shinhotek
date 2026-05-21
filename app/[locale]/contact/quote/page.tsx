@@ -17,11 +17,11 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale,
     path: "/contact/quote",
-    title: isKo ? "문의하기 | SHINHOTEK 제품 상담" : "Contact | SHINHOTEK Product Inquiry",
+    title: isKo ? "견적문의 | SHINHOTEK 제품 상담" : "Contact | SHINHOTEK Product Inquiry",
     description: isKo
       ? "SHINHOTEK 레이저·광학 솔루션 도입과 기술 상담을 문의하세요."
       : "Contact SHINHOTEK for product consultation on laser and optical solutions.",
-    keywords: ["문의하기", "Contact", "product inquiry", "laser and optical solution inquiry", "SHINHOTEK service", "optical measurement consultation"],
+    keywords: ["견적문의", "Contact", "product inquiry", "laser and optical solution inquiry", "SHINHOTEK service", "optical measurement consultation"],
     image: "/subpage-contact-bg.png",
   });
 }
@@ -36,10 +36,10 @@ export default async function QuotePage({
   const isKo = locale === "ko";
 
   return (
-    <div className="contactPage">
+    <div className="contactPage quoteReferencePage">
       <SubpageHero
-        eyebrow={isKo ? "문의하기" : "Contact"}
-        title={isKo ? "문의하기" : "Contact"}
+        eyebrow={isKo ? heroConfig?.eyebrowKo || "견적문의" : heroConfig?.eyebrowEn || "Contact"}
+        title={isKo ? heroConfig?.titleKo || "견적문의" : heroConfig?.titleEn || "Contact"}
         description={
           isKo
             ? heroConfig?.descriptionKo || "문의 유형과 요청 내용을 남겨주시면 담당자가 확인 후 안내드립니다."
@@ -51,8 +51,19 @@ export default async function QuotePage({
         lightText
       />
       <div className="container subpageContent">
-        <div className="pageBody">
-          <ContactForm locale={locale} />
+        <div className="quoteReferenceShell">
+          <aside className="quoteReferenceAside">
+            <span>{isKo ? "CONTACT" : "CONTACT"}</span>
+            <strong>{isKo ? "제품 선정부터 테스트 요청까지" : "From product selection to test requests"}</strong>
+            <p>
+              {isKo
+                ? "레이저, 스캐너, 계측, 광학 솔루션 조건을 남겨주시면 담당자가 검토 후 안내드립니다."
+                : "Share your laser, scanner, metrology, or optical solution requirements and the right team will follow up."}
+            </p>
+          </aside>
+          <div className="pageBody quoteReferenceForm">
+            <ContactForm locale={locale} />
+          </div>
         </div>
       </div>
     </div>

@@ -74,6 +74,11 @@ export function CompanyOverviewSection({
   const brandLead = localizedField(companyContent, "brandLead", locale);
   const description = isKo ? heroConfig?.descriptionKo : heroConfig?.descriptionEn;
   const body = description || brandLead;
+  const stats = [
+    { value: "20+", label: isKo ? "산업 레이저 지원 경험" : "Years of laser support" },
+    { value: "6", label: isKo ? "핵심 제품군" : "Core product groups" },
+    { value: "1:1", label: isKo ? "공정 맞춤 기술 검토" : "Process-specific review" },
+  ];
   const links = [
     {
       href: "/company/ceo-vision",
@@ -111,6 +116,14 @@ export function CompanyOverviewSection({
                   <p key={`${paragraph.slice(0, 24)}-${index}`}>{renderLines(paragraph)}</p>
                 ))
               : null}
+          </div>
+          <div className="companyCoreRayStats" aria-label={isKo ? "신호텍 회사 지표" : "Shinhotek company highlights"}>
+            {stats.map((stat) => (
+              <div key={stat.label} className="companyCoreRayStat">
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </div>
+            ))}
           </div>
           <div className="companySubpageGrid">
             {links.map((link) => (
@@ -199,6 +212,10 @@ export function CompanyCeoVisionSections({
 export function CompanyPartnersSection({ locale, partners }: { locale: Locale; partners: CompanyPartnerItem[] }) {
   const isKo = locale === "ko";
 
+  const logoWall = partners.length
+    ? partners.map((partner) => partner.name)
+    : ["COHERENT", "TRUMPF", "DATARAY", "ULO OPTICS", "JENOPTIK", "PULSEPOWER"];
+
   return (
     <section className="companyPartnerSection">
       <div className="container">
@@ -211,6 +228,13 @@ export function CompanyPartnersSection({ locale, partners }: { locale: Locale; p
                 ? "신호텍은 레이저, 광학, 계측, 자동화 분야의 파트너 네트워크를 기반으로 고객 공정에 맞는 제품과 솔루션을 연결합니다."
                 : "Shinhotek connects products and solutions for customer processes through a partner network across lasers, optics, metrology, and automation."}
             </p>
+          </div>
+          <div className="companyPartnerLogoWall" aria-label={isKo ? "파트너 로고 목록" : "Partner logo list"}>
+            {logoWall.map((name) => (
+              <div key={name} className="companyPartnerLogoTile">
+                <span>{name}</span>
+              </div>
+            ))}
           </div>
           <div className="companyPartnerGrid">
             {partners.map((partner) => (

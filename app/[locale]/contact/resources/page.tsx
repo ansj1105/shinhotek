@@ -1,4 +1,3 @@
-import { ContactSubnav } from "@/components/contact-subnav";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -40,7 +39,7 @@ export default async function ResourceListPage({
   const eyebrow = locale === "ko" ? heroConfig?.eyebrowKo || "자료실" : heroConfig?.eyebrowEn || "Resources";
   const title = locale === "ko" ? heroConfig?.titleKo || "자료실" : heroConfig?.titleEn || "Resource Library";
   const description = locale === "ko"
-    ? heroConfig?.descriptionKo || "자료실 게시물과 다운로드 자료를 제공합니다."
+    ? heroConfig?.descriptionKo || "제품 자료, 기술 문서, 다운로드 자료를 제공합니다."
     : heroConfig?.descriptionEn || "Browse resource posts and downloadable reference materials.";
 
   return (
@@ -54,28 +53,31 @@ export default async function ResourceListPage({
         backgroundOpacity={heroConfig?.backgroundOpacity ?? 0.9}
         lightText
       />
-      {/* <ContactSubnav locale={locale} activeHref="/contact/resources" /> */}
       <div className="container subpageContent">
-        <div className="resourcesTableWrap">
-          <div className="resourcesTableHead">
-            <span>No.</span>
-            <span>{locale === "ko" ? "제목" : "Title"}</span>
-            <span>{locale === "ko" ? "등록일" : "Date"}</span>
+        <div className="resourcesNewsLayout">
+          <div className="resourcesNewsHead">
+            <span>{locale === "ko" ? "기술 자료와 공지" : "News and technical resources"}</span>
+            <strong>{locale === "ko" ? "최신 자료" : "Latest updates"}</strong>
           </div>
-          <div className="resourcesTableBody">
-            {resources.map((resource, index) => (
-              <Link
-                key={resource.slug}
-                href={`/${locale}/contact/resources/${resource.slug}`}
-                className="resourcesRow"
-              >
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <span className="resourcesRowTitle">
-                  {locale === "ko" ? resource.titleKo : resource.titleEn}
-                </span>
-                <span>{new Date(resource.publishedAt ?? resource.createdAt).toLocaleDateString(locale === "ko" ? "ko-KR" : "en-US")}</span>
-              </Link>
-            ))}
+          <div className="resourcesNewsGrid">
+            {resources.map((resource) => {
+              const localizedTitle = locale === "ko" ? resource.titleKo : resource.titleEn;
+              const localizedExcerpt = locale === "ko" ? resource.excerptKo : resource.excerptEn;
+              const publishedDate = new Date(resource.publishedAt ?? resource.createdAt).toLocaleDateString(locale === "ko" ? "ko-KR" : "en-US");
+
+              return (
+                <Link
+                  key={resource.slug}
+                  href={`/${locale}/contact/resources/${resource.slug}`}
+                  className="resourcesNewsCard"
+                >
+                  <span className="resourcesNewsDate">{publishedDate}</span>
+                  <strong>{localizedTitle}</strong>
+                  {localizedExcerpt ? <p>{localizedExcerpt}</p> : null}
+                  <span className="resourcesNewsMore">{locale === "ko" ? "자세히 보기" : "Read more"}</span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>

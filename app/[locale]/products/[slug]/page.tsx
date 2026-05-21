@@ -56,6 +56,15 @@ function renderLines(paragraph: string) {
   ));
 }
 
+const productReferenceMeta: Record<string, { count: number; labelKo: string; labelEn: string }> = {
+  laser: { count: 8, labelKo: "Laser 제품군", labelEn: "Laser product groups" },
+  "laser-scanner": { count: 1, labelKo: "Laser Scanner 제품군", labelEn: "Laser scanner group" },
+  "laser-metrology": { count: 3, labelKo: "Laser Metrology 제품군", labelEn: "Laser metrology groups" },
+  "optical-solution": { count: 5, labelKo: "Optical Solution 제품군", labelEn: "Optical solution groups" },
+  "coating-solution": { count: 4, labelKo: "Coating Solution 제품군", labelEn: "Coating solution groups" },
+  "beam-delivery": { count: 3, labelKo: "Beam Delivery 제품군", labelEn: "Beam delivery groups" },
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -113,9 +122,10 @@ export default async function ProductDetailPage({
   const heroEyebrow = locale === "ko" ? product.heroEyebrowKo || "Product" : product.heroEyebrowEn || "Product";
   const heroBgImage = product.heroBgImageUrl || "/subpage-products-laser-bg.png";
   const imageUrl = product.imageUrl || "/product-placeholder.svg";
+  const referenceMeta = productReferenceMeta[slug];
 
   return (
-    <div className="productsPage">
+    <div className={`productsPage productDetailPage productDetailPage-${slug}`}>
       <SubpageHero
         eyebrow={heroEyebrow}
         title={heroTitle}
@@ -132,6 +142,13 @@ export default async function ProductDetailPage({
               <span>{localizedProductName}</span>
               <strong>{localizedSummary}</strong>
             </div>
+            {referenceMeta ? (
+              <div className="productDetailReferenceBlock">
+                <span>{locale === "ko" ? "구성" : "Lineup"}</span>
+                <strong>{referenceMeta.count}</strong>
+                <p>{locale === "ko" ? referenceMeta.labelKo : referenceMeta.labelEn}</p>
+              </div>
+            ) : null}
             {features.length ? (
               <div className="productDetailFeatureBlock">
                 <div className="productDetailFeatureTitle">Feature</div>
@@ -146,6 +163,9 @@ export default async function ProductDetailPage({
             ) : null}
           </div>
           <div className="productDetailVisual">
+            <div className="productReferenceLabel">
+              {slug === "laser" ? "TRUMPF STYLE LINEUP" : slug === "laser-scanner" ? "COHERENT STYLE SCANNER" : "TECHNICAL CATEGORY"}
+            </div>
             <div className="productDetailVisualPanel">
               <Image
                 src={imageUrl}
@@ -163,6 +183,7 @@ export default async function ProductDetailPage({
         <section className="productSection productCmsDetailSection">
           <div className="productCmsDetailGrid">
             <div className="productCmsDetailCopy">
+              <span className="productDetailKicker">{locale === "ko" ? "제품 개요" : "Product overview"}</span>
               <h2>{localizedProductName}</h2>
               <div className="productCmsDetailText">
                 {splitParagraphs(localizedContent || localizedSummary).map((paragraph, index) => (

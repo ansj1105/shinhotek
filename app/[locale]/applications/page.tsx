@@ -13,6 +13,25 @@ import type { Locale } from "@/lib/site";
 const applicationEnglishCopy: Record<string, { title: string; body: string }> = {};
 const applicationKoreanCopy: Record<string, { title: string; body: string }> = {};
 
+const solutionCapabilityMap: Record<string, { ko: string[]; en: string[] }> = {
+  "optical-solution": {
+    ko: ["공정 조건 분석", "제품 선정", "시험 구성", "기술 검토"],
+    en: ["Process analysis", "Product selection", "Test setup", "Technical review"],
+  },
+  "optical-design": {
+    ko: ["렌즈/미러 구성", "빔 쉐이핑", "광학 경로 설계", "성능 검토"],
+    en: ["Lens and mirror layout", "Beam shaping", "Optical path design", "Performance review"],
+  },
+  "mechanical-design": {
+    ko: ["모듈 구조", "장착 인터페이스", "유지보수 동선", "장비 공간 검토"],
+    en: ["Module structure", "Mounting interface", "Maintenance access", "Equipment space review"],
+  },
+  "software-design": {
+    ko: ["장비 제어", "데이터 연동", "운영 화면", "측정 흐름 관리"],
+    en: ["Equipment control", "Data integration", "Operator UI", "Measurement workflow"],
+  },
+};
+
 function splitApplicationParagraphs(value: string) {
   return value
     .split(/\n{2,}/)
@@ -124,6 +143,16 @@ export default async function ApplicationsPage({
                       <p key={`${entry.slug}-body-${index}`}>{renderApplicationLines(paragraph)}</p>
                     ))}
                   </div>
+                  {solutionCapabilityMap[entry.slug] ? (
+                    <div className="solutionCapabilityPanel" aria-label={locale === "ko" ? "핵심 역량" : "Core capabilities"}>
+                      <span>{locale === "ko" ? "핵심 역량" : "Capabilities"}</span>
+                      <div>
+                        {solutionCapabilityMap[entry.slug][locale].map((capability) => (
+                          <strong key={capability}>{capability}</strong>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
                 <ApplicationImageRail
                   images={entry.galleryImages}
